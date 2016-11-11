@@ -1,0 +1,11 @@
+domain = 'company.com'
+hosted_zone_id = 'ABCDEFGHIJKLMN'
+bucket = 'elasticbeanstalk-us-east-1-123456789012'
+app_name = 'my-app'
+env_name = 'my-app-rd'
+env_id = 'e-abcdefghij'
+eb_url = 'company.us-east-1.elasticbeanstalk.com'
+rds_hostname = 'company.abcdefghijkl.us-east-1.rds.amazonaws.com'
+rds_username = 'companydb'
+rds_password = 'companydbpassword'
+rds_port = 3306
