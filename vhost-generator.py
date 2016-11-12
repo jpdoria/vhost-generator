@@ -5,6 +5,7 @@ import logging
 import os
 import re
 import shutil
+import sys
 import zipfile
 
 # Vars from variables.py
@@ -91,6 +92,7 @@ def check_version():
                     return stripped_key
     except Exception as e:
         logger.error(e, exc_info=True)
+        sys.exit(1)
 
 
 def download_from_s3(key):
@@ -116,6 +118,7 @@ def download_from_s3(key):
         return extraction_path
     except Exception as e:
         logger.error(e, exc_info=True)
+        sys.exit(1)
 
 
 def create_vhost(customer, extraction_path):
@@ -155,6 +158,7 @@ def create_vhost(customer, extraction_path):
         logger.info('VirtualHost config created')
     except Exception as e:
         logger.error(e, exc_info=True)
+        sys.exit(1)
 
 
 def deploy_app(dir_name):
@@ -220,11 +224,11 @@ def deploy_app(dir_name):
         )
 
         logger.info('New app version ({}) is now deployed to EB'.format(new_app_version))
+        clean_up(dir_name)
         return new_app_version
     except Exception as e:
         logger.error(e, exc_info=True)
-    finally:
-        clean_up(dir_name)
+        sys.exit(1)
 
 
 def create_db(customer):
@@ -286,6 +290,7 @@ def create_dns_record(customer_url):
         return customer_url
     except Exception as e:
         logger.error(e, exc_info=True)
+        sys.exit(1)
 
 
 # noinspection PyUnusedLocal
@@ -320,3 +325,4 @@ def main(event, context):
         return output
     except Exception as e:
         logger.error(e, exc_info=True)
+        sys.exit(1)
